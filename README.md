@@ -6,6 +6,8 @@ The Romans were a clever bunch. They conquered most of Europe and ruled it for h
 
 The Romans wrote numbers using letters : I, V, X, L, C, D, M. (notice these letters have lots of straight lines and are hence easy to hack into stone tablets)
 
+## Soluction
+
 ## File Structure
 
 In this project you'll find the following directories and files:
@@ -15,10 +17,12 @@ taskzenvia/
 
 ├── src
 │   ├── main/java
-│   │   ├──
-│   │   └── 
+│   │   ├── ConvertNumber.java
+│   │   ├── Main.java
+│   │   ├── RomanLetter.java
+│   │   └── RomanNumber.java
 │   └── test/java
-│       ├── 
+│       ├── MainTest.java
 │       └──
 ├── target
 │   ├── other files
@@ -38,7 +42,7 @@ mvn compile
 ```
 ### test
 ```
-mvn test
+mvn test or mvn test -Dtest=MainTest test
 ```
 ### run
 ```

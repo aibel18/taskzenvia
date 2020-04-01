@@ -1,6 +1,13 @@
+/**
+ * Main.class
+ * 
+ *
+ * @author  Abel Ticona
+ * @version 1.0
+ * @since   2020
+ */
 
-
-public class App {
+public class Main {
   public static void main(String[] args) {
     System.out.println("Hello World!");
   }
@@ -11,5 +18,9 @@ public class App {
       sum -= Integer.valueOf(summand);
     }
     return sum;
+  }
+
+  public double divide(double x, double y) {
+    return x / y;
   }
 }
