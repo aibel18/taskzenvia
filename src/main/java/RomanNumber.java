@@ -15,27 +15,42 @@ public class RomanNumber {
   private String romanNumber;
 
   public RomanNumber(int arabicNumber) {
+
+    this.validate(arabicNumber);
+
     this.arabicNumber = arabicNumber;
+    this.romanNumber = ConvertNumber.arabicToRoman(arabicNumber);
   }
 
   public RomanNumber(String romanNumber) {
-    this.romanNumber = romanNumber;
-  }
 
-  public void setArabicNumber(int arabicNumber) {
-    this.arabicNumber = arabicNumber;
+    this.validate(romanNumber);
+
+    this.romanNumber = romanNumber;
+    this.arabicNumber = ConvertNumber.romanToArabic(romanNumber);
   }
 
   public int getArabicNumber() {
     return this.arabicNumber;
   }
 
-  public void setRomanNumber(String romanNumber) {
-    this.romanNumber = romanNumber;
-  }
-
   public String getRomanNumber() {
     return this.romanNumber;
+  }
+
+  private void validate(int arabicNumber) {
+    if (arabicNumber > 3000)
+      throw new IllegalArgumentException("RomanNumber only supports numbers up to 3000");
+
+    if (arabicNumber < 0)
+      throw new IllegalArgumentException("RomanNumber not supports negative numbers");
+  }
+
+  private void validate(String romanNumber) {
+    for (char c : romanNumber.toCharArray()) {
+      if (RomanLetter.valueOf(c) == null)
+        throw new IllegalArgumentException("RomanNumber only supports characters equals to " + RomanLetter.printAll());
+    }
   }
 
   public RomanNumber add(RomanNumber otheRomanNumber) {
