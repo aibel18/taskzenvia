@@ -17,15 +17,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.junit.jupiter.api.Timeout;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class RomanNumberTest extends TimingExtension{
@@ -52,58 +49,77 @@ public class RomanNumberTest extends TimingExtension{
 
   @Test
   @Order(3)
-  public void convertToRoman() {
+  public void convertToRomaBase1() {
 
-    assertEquals("", new RomanNumber(0).getRomanNumber(), () -> "it's not number zero in romans");
-    assertEquals("I", new RomanNumber(1).getRomanNumber(), () -> "it's not number one in romans");
-    assertEquals("III", new RomanNumber(3).getRomanNumber(), () -> "it's not number three in romans");
-    assertEquals("IV", new RomanNumber(4).getRomanNumber(), () -> "it's not number four in romans");
-    assertEquals("V", new RomanNumber(5).getRomanNumber(), () -> "it's not number five in romans");
-    assertEquals("VII", new RomanNumber(7).getRomanNumber(), () -> "it's not number seven in romans");
-    assertEquals("IX", new RomanNumber(9).getRomanNumber(), () -> "it's not number nine in romans");
+    assertEquals("", new RomanNumber(0).getRoman(), () -> "it's not number zero in romans");
+    assertEquals("I", new RomanNumber(1).getRoman(), () -> "it's not number one in romans");
+    assertEquals("III", new RomanNumber(3).getRoman(), () -> "it's not number three in romans");
+    assertEquals("IV", new RomanNumber(4).getRoman(), () -> "it's not number four in romans");
+    assertEquals("V", new RomanNumber(5).getRoman(), () -> "it's not number five in romans");
+    assertEquals("VII", new RomanNumber(7).getRoman(), () -> "it's not number seven in romans");
+    assertEquals("IX", new RomanNumber(9).getRoman(), () -> "it's not number nine in romans");
   }
 
-  //@Test
-  @DisplayName("TEST 1")
-  public void valuatesExpression() {
-    //logger.info("Before all tests");
-    Main calculator = new Main();
-    int sum = calculator.evaluate("1+2+3");
-    assertEquals(-6, sum, () -> "My error message -- " + "to avoid");
+  @Test
+  @Order(4)
+  public void convertToRomanBase10() {
+
+    RomanNumber base10[] = {
+      new RomanNumber(10, "X"),
+      new RomanNumber(37, "XXXVII"),
+      new RomanNumber(51, "LI"),
+      new RomanNumber(93, "XCIII"),
+      new RomanNumber(79, "LXXIX"),
+      new RomanNumber(94, "XCIV"),
+      new RomanNumber(88, "LXXXVIII") };
+
+    for(RomanNumber rn: base10)
+      assertEquals(rn.getRoman(), new RomanNumber(rn.getArabic()).getRoman(), () -> "it's not number "+rn.getArabic()+" in romans");
   }
 
-  //@RepeatedTest(10)
-  public void valuatesExpressions() {
+  @Test
+  @Order(5)
+  public void convertToRomanBase100() {
 
-    new Main().evaluate("1+2+3+4+5+6");
+    RomanNumber base100[] = {
+      new RomanNumber(100, "C"),
+      new RomanNumber(376, "CCCLXXVI"),
+      new RomanNumber(934, "CMXXXIV"),
+      new RomanNumber(455, "CDLV"),
+      new RomanNumber(190, "CXC"),
+      new RomanNumber(819, "DCCCXIX") };
+
+    for(RomanNumber rn: base100)
+      assertEquals(rn.getRoman(), new RomanNumber(rn.getArabic()).getRoman(), () -> "it's not number "+rn.getArabic()+" in romans");
   }
 
-  //@Test
-  @DisplayName("TEST 2")
-  @Timeout(value = 110, unit = TimeUnit.MILLISECONDS)
-  void exceptionTesting() {
-    //Exception exception = assertThrows(ArithmeticException.class, () -> new App().divide(1, 0));
-    //assertEquals("/ by zero", exception.getMessage());
-    try {
-      Thread.sleep(100);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      //e.printStackTrace();
-    }
+  @Test
+  @Order(6)
+  public void convertToRomanBase1000() {
+
+    RomanNumber base1000[] = {
+      new RomanNumber(3000, "MMM"),
+      new RomanNumber(2956, "MMCMLVI"),
+      new RomanNumber(1925, "MCMXXV"),
+      new RomanNumber(2818, "MMDCCCXVIII"),
+      new RomanNumber(1090, "MXC"),
+      new RomanNumber(2444, "MMCDXLIV") };
+
+    for(RomanNumber rn: base1000)
+      assertEquals(rn.getRoman(), new RomanNumber(rn.getArabic()).getRoman(), () -> "it's not number "+rn.getArabic()+" in romans");
   }
 
-  //@Test
-  //@ParameterizedTest
-  void mytest() {
+  @Test
+  @Order(7)
+  public void runTime() {
 
-    assertTimeout(Duration.ofMillis(10), () -> {
+    long timeMillis = 20;
 
-      Main calculator = new Main();
-      int sum = calculator.evaluate("1+2");
-      //Thread.sleep(100);
-
-      //return "a result";
-    });
-    //assertEquals("a result", actualResult);
+    assertTimeout(Duration.ofMillis(timeMillis), () -> {
+      new RomanNumber(2333);
+      new RomanNumber(2999);
+      new RomanNumber(2444);
+      new RomanNumber(2888);
+    },"runtime exceeded expectations: "+timeMillis);
   }
 }

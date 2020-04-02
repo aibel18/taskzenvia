@@ -11,69 +11,76 @@
 
 public class RomanNumber {
 
-  private int arabicNumber;
-  private String romanNumber;
+  private int arabic;
+  private String roman;
 
-  public RomanNumber(int arabicNumber) {
+  public RomanNumber(int arabic) {
 
-    this.validate(arabicNumber);
+    this.validate(arabic);
 
-    this.arabicNumber = arabicNumber;
-    this.romanNumber = ConvertNumber.arabicToRoman(arabicNumber);
+    this.arabic = arabic;
+    this.roman = ConvertNumber.arabicToRoman(arabic);
   }
 
-  public RomanNumber(String romanNumber) {
+  public RomanNumber(String roman) {
 
-    this.validate(romanNumber);
+    this.validate(roman);
 
-    this.romanNumber = romanNumber;
-    this.arabicNumber = ConvertNumber.romanToArabic(romanNumber);
+    this.roman = roman;
+    this.arabic = ConvertNumber.romanToArabic(roman);
   }
 
-  public int getArabicNumber() {
-    return this.arabicNumber;
+  public RomanNumber(int arabic, String roman) {
+    this.validate(arabic);
+    this.validate(roman);
+    this.arabic = arabic;
+    this.roman = roman;
   }
 
-  public String getRomanNumber() {
-    return this.romanNumber;
+  public int getArabic() {
+    return this.arabic;
   }
 
-  private void validate(int arabicNumber) {
-    if (arabicNumber > 3000)
+  public String getRoman() {
+    return this.roman;
+  }
+
+  private void validate(int arabic) {
+    if (arabic > 3000)
       throw new IllegalArgumentException("RomanNumber only supports numbers up to 3000");
 
-    if (arabicNumber < 0)
+    if (arabic < 0)
       throw new IllegalArgumentException("RomanNumber not supports negative numbers");
   }
 
-  private void validate(String romanNumber) {
-    for (char c : romanNumber.toCharArray()) {
+  private void validate(String roman) {
+    for (char c : roman.toCharArray()) {
       if (RomanLetter.valueOf(c) == null)
         throw new IllegalArgumentException("RomanNumber only supports characters equals to " + RomanLetter.printAll());
     }
   }
 
   public RomanNumber add(RomanNumber otheRomanNumber) {
-    int result = this.arabicNumber + otheRomanNumber.arabicNumber;
+    int result = this.arabic + otheRomanNumber.arabic;
     return new RomanNumber(result);
   }
 
   public RomanNumber sustract(RomanNumber otheRomanNumber) {
-    int result = this.arabicNumber - otheRomanNumber.arabicNumber;
+    int result = this.arabic - otheRomanNumber.arabic;
     return new RomanNumber(result);
   }
 
   public RomanNumber mult(RomanNumber otheRomanNumber) {
-    int result = this.arabicNumber * otheRomanNumber.arabicNumber;
+    int result = this.arabic * otheRomanNumber.arabic;
     return new RomanNumber(result);
   }
 
   public RomanNumber divide(RomanNumber otheRomanNumber) {
-    int result = this.arabicNumber / otheRomanNumber.arabicNumber;
+    int result = this.arabic / otheRomanNumber.arabic;
     return new RomanNumber(result);
   }
 
   public void print() {
-    System.out.println("roman: " + this.romanNumber + " arabic: " + this.arabicNumber);
+    System.out.println("roman: " + this.roman + " arabic: " + this.arabic);
   }
 }

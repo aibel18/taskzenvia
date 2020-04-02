@@ -6,7 +6,7 @@ The Romans were a clever bunch. They conquered most of Europe and ruled it for h
 
 The Romans wrote numbers using letters : I, V, X, L, C, D, M. (notice these letters have lots of straight lines and are hence easy to hack into stone tablets)
 
-## Soluction
+## Solution
 The system works based on 3 letters of the Roman numerals, the unit, the half and the major of the decimal system. we see the following table.
 
 ||unit| half| major|
@@ -35,7 +35,7 @@ For each number we take each digit and place it in the table for example **x** =
 |hundreds|4|
 |thousands|1|
 
-to extract each digit we apply division and module by 10 until that x = 0
+to extract each digit we apply division and module by 10 until that **x** = 0
 
 
 ## File Structure
@@ -72,7 +72,7 @@ mvn compile
 ```
 ### test
 ```
-mvn test or mvn test -Dtest=MainTest test
+mvn test or mvn test -Dtest=RomanNumberTest test
 ```
 ### run
 ```
@@ -80,10 +80,28 @@ mvn package
 java -jar target/taskzenvia.jar
 ```
 
-## Test
-### t-1
-### t-2
+## Unit Test
+### t-1 validate Arguments
 
+- 0 <= **x** <= 3000
+- only to use letters : {I, V, X, L, C, D, M}
+
+### t-2 invalidate arguments
+the program should throw exceptions
+
+- **x** < 0 or  3000 < **x**
+- other letter != { I, V, X, L, C, D, M }
+
+### t3 convert number to roman with one digit
+- **x** = [0,10 [
+### t4 convert number to roman with two digit
+- **x** = [10,100 [
+### t5 convert number to roman with three digit
+- **x** = [100,1000 [
+### t6 convert number to roman with four digit
+- **x** = [1000,3000]
+### t7 computing runtime of the convertToRoman
+- runtime < 20ms
 ## Resources
 - Junit 5
 - Maven 3.5.4
